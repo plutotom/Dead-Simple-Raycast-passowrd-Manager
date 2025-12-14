@@ -42,6 +42,7 @@ export default function Command() {
 
   useEffect(() => {
     LocalStorage.setItem("todos", JSON.stringify(state.todos));
+    console.log(JSON.stringify(state.todos));
   }, [state.todos]);
 
   const handleCreate = useCallback(

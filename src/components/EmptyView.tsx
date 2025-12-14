@@ -12,7 +12,7 @@ function EmptyView(props: {
     return (
       <List.EmptyView
         icon="😕"
-        title="No matching todos found"
+        title="No matching passwords found"
         description={`Can't find a todo matching ${props.searchText}.\nCreate it now!`}
         actions={
           <ActionPanel>
@@ -28,7 +28,7 @@ function EmptyView(props: {
         <List.EmptyView
           icon="🎉"
           title="All done"
-          description="All todos completed - way to go! Why not create some more?"
+          description="All passwords completed - way to go! Why not create some more?"
           actions={
             <ActionPanel>
               <CreateTodoAction defaultTitle={props.searchText} onCreate={props.onCreate} />
@@ -41,8 +41,8 @@ function EmptyView(props: {
       return (
         <List.EmptyView
           icon="😢"
-          title="No todos completed"
-          description="Uh-oh, looks like you haven't completed any todos yet."
+          title="No passwords completed"
+          description="Uh-oh, looks like you haven't completed any passwords yet."
         />
       );
     }
@@ -51,8 +51,8 @@ function EmptyView(props: {
       return (
         <List.EmptyView
           icon="📝"
-          title="No todos found"
-          description="You don't have any todos yet. Why not add some?"
+          title="No passwords found"
+          description="You don't have any passwords yet. Why not add some?"
           actions={
             <ActionPanel>
               <CreateTodoAction defaultTitle={props.searchText} onCreate={props.onCreate} />
