@@ -1,5 +1,6 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
+  "version": "1.2.0",
   "name": "password-manager-own",
   "title": "Password Manager (Own)",
   "owner": "proctors",
