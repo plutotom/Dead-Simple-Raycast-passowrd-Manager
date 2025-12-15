@@ -8,18 +8,14 @@ import { CreateTodoAction, DeleteTodoAction, EmptyView } from "./components";
 type State = {
   filter: Filter;
   isLoading: boolean;
-  searchText: string;
   todos: Password[];
-  visibleTodos: Password[];
 };
 
 export default function Command() {
   const [state, setState] = useState<State>({
     filter: Filter.All,
     isLoading: true,
-    searchText: "",
     todos: [],
-    visibleTodos: [],
   });
 
   useEffect(() => {
@@ -48,7 +44,7 @@ export default function Command() {
   const handleCreate = useCallback(
     (title: string, password: string) => {
       const newTodos = [...state.todos, { id: nanoid(), title, password, isCompleted: false }];
-      setState((previous) => ({ ...previous, todos: newTodos, filter: Filter.All, searchText: "" }));
+      setState((previous) => ({ ...previous, todos: newTodos, filter: Filter.All }));
     },
     [state.todos, setState],
   );
@@ -75,7 +71,6 @@ export default function Command() {
   return (
     <List
       isLoading={state.isLoading}
-      searchText={state.searchText}
       // searchBarAccessory={
       //   <List.Dropdown
       //     tooltip="Select Todo List"
@@ -87,11 +82,8 @@ export default function Command() {
       //     <List.Dropdown.Item title="Completed" value={Filter.Completed} />
       //   </List.Dropdown>
       // }
-      onSearchTextChange={(newValue) => {
-        setState((previous) => ({ ...previous, searchText: newValue }));
-      }}
     >
-      <EmptyView filter={state.filter} todos={filterTodos()} searchText={state.searchText} onCreate={handleCreate} />
+      <EmptyView filter={state.filter} todos={filterTodos()} onCreate={handleCreate} />
       {filterTodos().map((todo, index) => (
         <List.Item
           key={todo.id}
@@ -99,14 +91,10 @@ export default function Command() {
           title={todo.title}
           actions={
             <ActionPanel>
-              <ActionPanel.Section>
-                <Action.Paste title="Past Password" content={todo.password} />
-                <Action.CopyToClipboard title="Copy Password to Clipboard" content={todo.password} />
-              </ActionPanel.Section>
-              <ActionPanel.Section>
-                <CreateTodoAction onCreate={handleCreate} />
-                <DeleteTodoAction onDelete={() => handleDelete(index)} />
-              </ActionPanel.Section>
+              <Action.Paste title="Paste Password" content={todo.password} />
+              <Action.CopyToClipboard title="Copy Password to Clipboard" content={todo.password} />
+              <CreateTodoAction onCreate={handleCreate} />
+              <DeleteTodoAction onDelete={() => handleDelete(index)} />
             </ActionPanel>
           }
         />
